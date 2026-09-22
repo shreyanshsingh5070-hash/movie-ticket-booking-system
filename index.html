@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - MovieTickets</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Experience the Magic of Cinema</h1>
+            <p>Book tickets for the latest blockbusters in theaters near you.</p>
+            <a href="movies.html" class="btn btn-primary" style="font-size: var(--text-lg); padding: var(--spacing-3) var(--spacing-6);">Browse Movies</a>
+        </div>
+    </header>
+
+    <main class="container now-showing">
+        <div class="section-title">
+            <h2>Now Showing</h2>
+            <a href="movies.html" style="color: var(--primary-color); font-weight: 500;">View All &rarr;</a>
+        </div>
+        
+        <div id="now-showing-grid" class="grid grid-cols-4">
+            <!-- Movie cards injected here -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 MovieTickets. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            renderNavbar('navbar-container');
+            
+            const moviesGrid = document.getElementById('now-showing-grid');
+            const movies = await getMovies();
+            
+            if (movies && movies.length > 0) {
+                const topMovies = movies.slice(0, 4);
+                let gridHTML = '';
+                
+                topMovies.forEach(movie => {
+                    gridHTML += `
+                        <a href="movie-details.html?id=${movie.id}" class="movie-card-link">
+                            <div class="card">
+                                <img src="${movie.posterUrl}" alt="${movie.title}" class="card-img" onerror="this.src='https://via.placeholder.com/300x450?text=Poster'">
+                                <div class="card-body">
+                                    <h3 class="card-title">${movie.title}</h3>
+                                    <p class="card-text">${movie.genre} &bull; ${movie.duration}</p>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                });
+                
+                moviesGrid.innerHTML = gridHTML;
+            } else {
+                moviesGrid.innerHTML = '<p>No movies available right now.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

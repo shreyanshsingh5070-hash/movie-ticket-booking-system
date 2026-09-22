@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - MovieTickets</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .ticket-container {
+            max-width: 600px;
+            margin: var(--spacing-8) auto;
+        }
+        .ticket {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .ticket-header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: var(--spacing-4);
+            text-align: center;
+        }
+        .ticket-header h2 {
+            margin: 0;
+            color: white;
+        }
+        .ticket-body {
+            padding: var(--spacing-6);
+        }
+        .ticket-detail {
+            margin-bottom: var(--spacing-4);
+        }
+        .ticket-detail-label {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-1);
+        }
+        .ticket-detail-value {
+            font-size: var(--text-lg);
+            font-weight: 600;
+        }
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-4);
+        }
+        .ticket-divider {
+            border-top: 2px dashed rgba(255, 255, 255, 0.1);
+            margin: var(--spacing-4) 0;
+            position: relative;
+        }
+        .ticket-divider::before, .ticket-divider::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--background-color);
+            border-radius: 50%;
+        }
+        .ticket-divider::before { left: -30px; }
+        .ticket-divider::after { right: -30px; }
+        .barcode-container {
+            text-align: center;
+            margin-top: var(--spacing-6);
+        }
+        .barcode {
+            height: 60px;
+            background-image: repeating-linear-gradient(90deg, 
+                var(--text-primary) 0, var(--text-primary) 2px, 
+                transparent 2px, transparent 4px,
+                var(--text-primary) 4px, var(--text-primary) 5px,
+                transparent 5px, transparent 8px,
+                var(--text-primary) 8px, var(--text-primary) 12px,
+                transparent 12px, transparent 14px);
+            opacity: 0.8;
+            margin-bottom: var(--spacing-2);
+        }
+        .ticket-footer {
+            padding: var(--spacing-4);
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <main class="container">
+        <div id="confirmation-area" class="ticket-container">
+            <div style="text-align: center; padding: 50px;">Loading ticket...</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 MovieTickets. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!requireAuth()) return;
+            renderNavbar('navbar-container');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookingId = urlParams.get('bookingId');
+            const container = document.getElementById('confirmation-area');
+
+            if (!bookingId) {
+                container.innerHTML = '<div class="not-found"><h2>Invalid Booking</h2></div>';
+                return;
+            }
+
+            const bookings = await getBookings();
+            const booking = bookings.find(b => b.bookingId === bookingId);
+
+            if (!booking) {
+                container.innerHTML = '<div class="not-found"><h2>Booking Not Found</h2></div>';
+                return;
+            }
+
+            const dateObj = new Date(booking.date);
+            dateObj.setMinutes(dateObj.getMinutes() + dateObj.getTimezoneOffset());
+            const dateStr = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+
+            const html = `
+                <div class="ticket">
+                    <div class="ticket-header">
+                        <h2>Booking Confirmed!</h2>
+                    </div>
+                    <div class="ticket-body">
+                        <div class="ticket-detail">
+                            <div class="ticket-detail-label">Movie</div>
+                            <div class="ticket-detail-value" style="font-size: var(--text-2xl); color: var(--primary-color);">${booking.movieTitle}</div>
+                        </div>
+                        
+                        <div class="ticket-grid">
+                            <div class="ticket-detail">
+                                <div class="ticket-detail-label">Date</div>
+                                <div class="ticket-detail-value">${dateStr}</div>
+                            </div>
+                            <div class="ticket-detail">
+                                <div class="ticket-detail-label">Time</div>
+                                <div class="ticket-detail-value">${booking.time}</div>
+                            </div>
+                            <div class="ticket-detail">
+                                <div class="ticket-detail-label">Theatre</div>
+                                <div class="ticket-detail-value">${booking.theatre}</div>
+                            </div>
+                            <div class="ticket-detail">
+                                <div class="ticket-detail-label">Booking ID</div>
+                                <div class="ticket-detail-value">${booking.bookingId}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ticket-divider"></div>
+                        
+                        <div class="ticket-grid">
+                            <div class="ticket-detail">
+                                <div class="ticket-detail-label">Seats (${booking.seats.length})</div>
+                                <div class="ticket-detail-value" style="color: var(--accent-color);">${booking.seats.join(', ')}</div>
+                            </div>
+                            <div class="ticket-detail">
+                                <div class="ticket-detail-label">Total Paid</div>
+                                <div class="ticket-detail-value">$${booking.totalPrice.toFixed(2)}</div>
+                            </div>
+                        </div>
+
+                        <div class="barcode-container">
+                            <div class="barcode"></div>
+                            <div style="font-size: 12px; letter-spacing: 4px; color: var(--text-secondary);">${booking.bookingId}</div>
+                        </div>
+                    </div>
+                    <div class="ticket-footer">
+                        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* css/movies.css */
+.movies-header {
+    margin-bottom: var(--spacing-6);
+}
+
+.filters-bar {
+    background-color: var(--surface-color);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-6);
+    display: flex;
+    gap: var(--spacing-4);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-input, .filter-select {
+    padding: var(--spacing-2) var(--spacing-3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-md);
+    font-family: inherit;
+    font-size: var(--text-sm);
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input:focus, .filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.filter-select {
+    min-width: 150px;
+    cursor: pointer;
+}
+
+.movie-card-link {
+    display: block;
+    height: 100%;
+}
+
+.no-results {
+    text-align: center;
+    padding: var(--spacing-8) 0;
+    color: var(--text-secondary);
+    grid-column: 1 / -1;
+}
