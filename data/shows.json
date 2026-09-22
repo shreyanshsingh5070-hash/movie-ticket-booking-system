@@ -1,0 +1,46 @@
+[
+  {
+    "id": 101,
+    "movieId": 1,
+    "theatre": "Starlight Cinemas",
+    "date": "2026-09-25",
+    "time": "18:00",
+    "screenType": "IMAX",
+    "totalSeats": 100,
+    "price": 15.00,
+    "bookedSeats": []
+  },
+  {
+    "id": 102,
+    "movieId": 1,
+    "theatre": "Starlight Cinemas",
+    "date": "2026-09-25",
+    "time": "21:30",
+    "screenType": "Standard",
+    "totalSeats": 100,
+    "price": 12.00,
+    "bookedSeats": []
+  },
+  {
+    "id": 103,
+    "movieId": 2,
+    "theatre": "Galaxy Multiplex",
+    "date": "2026-09-26",
+    "time": "19:00",
+    "screenType": "Dolby Atmos",
+    "totalSeats": 100,
+    "price": 16.00,
+    "bookedSeats": []
+  },
+  {
+    "id": 104,
+    "movieId": 3,
+    "theatre": "Starlight Cinemas",
+    "date": "2026-09-27",
+    "time": "20:00",
+    "screenType": "IMAX",
+    "totalSeats": 100,
+    "price": 15.00,
+    "bookedSeats": []
+  }
+]
