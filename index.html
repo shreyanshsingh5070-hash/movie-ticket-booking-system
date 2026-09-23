@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShowTime — Book Movie Tickets</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Show<span>Time</span></div>
+    <div class="nav-links">
+      <a href="index.html">Movies</a>
+      <a href="#">Cinemas</a>
+      <a href="#">Offers</a>
+    </div>
+    <div class="city-picker">Mathura, UP ▾</div>
+  </nav>
+
+  <section class="hero">
+    <h1>Your seat is waiting.</h1>
+    <p>Book tickets for the latest movies playing near you, in a few taps.</p>
+    <div class="search-bar">
+      <input type="text" placeholder="Search movies, cinemas...">
+      <button>Search</button>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <h2>Now Showing</h2>
+    <span id="movie-count"></span>
+  </div>
+
+  <div class="movie-grid" id="movie-grid">
+    <!-- movie cards injected by js/script.js -->
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
