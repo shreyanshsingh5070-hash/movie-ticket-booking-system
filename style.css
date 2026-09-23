@@ -54,6 +54,27 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-dim);
 }
 
+.login-btn {
+  margin-left: 16px;
+  background: var(--gold);
+  color: #101118;
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.signup-btn {
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* ---------- HERO ---------- */
 .hero {
   padding: 64px 48px 40px;
@@ -71,17 +92,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-dim);
   font-size: 16px;
   margin-bottom: 28px;
-}
-
-.signup-btn {
-  margin-left: 8px;
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  padding: 8px 20px;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 600;
 }
 
 .search-bar {
