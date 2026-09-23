@@ -73,6 +73,17 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 28px;
 }
 
+.signup-btn {
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .search-bar {
   display: flex;
   border: 1px solid var(--border);
