@@ -1,0 +1,382 @@
+
+:root {
+  --bg: #101118;
+  --bg-raised: #171925;
+  --card: #1c1e2b;
+  --text: #F1F0EC;
+  --text-dim: #9A9CAE;
+  --gold: #F4B41A;
+  --border: #2A2C3B;
+  --radius: 4px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(16,17,24,0.92);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.logo span { color: var(--gold); }
+
+.nav-links { display: flex; gap: 32px; font-size: 15px; color: var(--text-dim); }
+.nav-links a:hover { color: var(--text); }
+
+.city-picker {
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  padding: 64px 48px 40px;
+  max-width: 640px;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+
+.hero p {
+  color: var(--text-dim);
+  font-size: 16px;
+  margin-bottom: 28px;
+}
+
+.search-bar {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.search-bar input {
+  flex: 1;
+  background: var(--bg-raised);
+  border: none;
+  padding: 14px 16px;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.search-bar input:focus { outline: none; }
+
+.search-bar button {
+  background: var(--gold);
+  color: #101118;
+  border: none;
+  padding: 0 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- MOVIE GRID ---------- */
+.section-heading {
+  padding: 0 48px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.section-heading h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+}
+
+.section-heading span { color: var(--text-dim); font-size: 14px; }
+
+.movie-grid {
+  padding: 0 48px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.movie-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.movie-card:hover { border-color: var(--gold); }
+
+.movie-poster {
+  height: 260px;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  position: relative;
+}
+
+.movie-poster .cert {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.55);
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: var(--radius);
+}
+
+.movie-poster .rating {
+  background: rgba(0,0,0,0.55);
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.movie-info { padding: 14px 16px 18px; }
+
+.movie-info h3 { font-size: 16px; margin-bottom: 4px; }
+
+.movie-info p { font-size: 13px; color: var(--text-dim); }
+
+.movie-info .meta { margin-top: 8px; font-size: 12px; color: var(--text-dim); display: flex; gap: 10px; }
+
+/* ---------- SEAT SELECTION (page 2, WIP) ---------- */
+.seat-page { padding: 40px 48px; max-width: 900px; margin: 0 auto; }
+
+.screen-label {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.screen-curve {
+  height: 6px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 50%;
+  margin-bottom: 40px;
+}
+
+.seat-map { display: grid; gap: 10px; justify-content: center; margin-bottom: 40px; }
+
+.seat-row { display: flex; gap: 10px; align-items: center; justify-content: center; }
+
+.row-label { width: 20px; color: var(--text-dim); font-size: 13px; }
+
+.seat {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px 6px 2px 2px;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  cursor: pointer;
+}
+
+.seat.selected { background: var(--gold); border-color: var(--gold); }
+.seat.taken { background: #3a3c4d; cursor: not-allowed; opacity: 0.5; }
+
+.legend { display: flex; gap: 24px; justify-content: center; font-size: 13px; color: var(--text-dim); margin-bottom: 32px; }
+.legend .box { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 6px; vertical-align: middle; }
+
+.booking-summary {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pay-btn {
+  background: var(--gold);
+  color: #101118;
+  border: none;
+  padding: 14px 32px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* ---------- AUTH (login.html / signup.html) ---------- */
+.auth-page {
+  max-width: 380px;
+  margin: 60px auto;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.auth-page h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.auth-page p.sub { color: var(--text-dim); font-size: 14px; margin-bottom: 24px; }
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
+
+.form-group input {
+  width: 100%;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.form-group input:focus { outline: none; border-color: var(--gold); }
+
+.auth-submit {
+  width: 100%;
+  background: var(--gold);
+  color: #101118;
+  border: none;
+  padding: 13px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.auth-switch { text-align: center; margin-top: 18px; font-size: 13px; color: var(--text-dim); }
+.auth-switch a { color: var(--gold); }
+
+/* ---------- SHOWTIMES (showtimes.html) ---------- */
+.showtimes-page { padding: 40px 48px; max-width: 800px; margin: 0 auto; }
+
+.showtimes-page h2 { font-family: 'Bebas Neue', sans-serif; font-size: 30px; margin-bottom: 4px; }
+.showtimes-page p.sub { color: var(--text-dim); margin-bottom: 28px; }
+
+.picker-label { font-size: 13px; color: var(--text-dim); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+.date-row, .cinema-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+
+.date-chip, .cinema-card, .time-chip {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.date-chip.active, .cinema-card.active, .time-chip.active {
+  border-color: var(--gold);
+  background: rgba(244, 180, 26, 0.1);
+  color: var(--gold);
+}
+
+.cinema-card { flex: 1 1 220px; }
+.cinema-card h4 { font-size: 15px; margin-bottom: 4px; color: var(--text); }
+.cinema-card p { font-size: 12px; color: var(--text-dim); }
+
+.time-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+
+.continue-btn {
+  background: var(--gold);
+  color: #101118;
+  border: none;
+  padding: 14px 36px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* ---------- PAYMENT (payment.html) ---------- */
+.payment-page { padding: 40px 48px; max-width: 640px; margin: 0 auto; }
+
+.payment-page h2 { font-family: 'Bebas Neue', sans-serif; font-size: 30px; margin-bottom: 20px; }
+
+.order-summary {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  font-size: 14px;
+}
+
+.order-summary .row { display: flex; justify-content: space-between; padding: 6px 0; color: var(--text-dim); }
+.order-summary .row.total { color: var(--text); font-weight: 700; border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; }
+
+.pay-methods { display: flex; gap: 12px; margin-bottom: 28px; }
+
+.pay-method {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pay-method.active { border-color: var(--gold); color: var(--gold); }
+
+.confirm-box {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.confirm-box .tick {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #101118;
+  font-size: 32px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.qr-box {
+  width: 140px; height: 140px;
+  background: var(--bg-raised);
+  border: 1px dashed var(--border);
+  margin: 24px auto;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .navbar, .hero, .section-heading, .movie-grid, .seat-page, .auth-page, .showtimes-page, .payment-page { padding-left: 20px; padding-right: 20px; }
+  .nav-links { display: none; }
+  .hero h1 { font-size: 38px; }
+}
