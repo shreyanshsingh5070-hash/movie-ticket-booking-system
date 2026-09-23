@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment — ShowTime</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Show<span>Time</span></div>
+    <div class="nav-links">
+      <a href="index.html">Movies</a>
+      <a href="#">Cinemas</a>
+      <a href="#">Offers</a>
+    </div>
+    <div class="city-picker">Mathura, UP ▾</div>
+  </nav>
+
+  <div class="payment-page" id="payment-view">
+    <h2>Payment</h2>
+
+    <div class="order-summary">
+      <div class="row"><span>Kranti Ka Safar</span><span>PVR Vrindavan Mall</span></div>
+      <div class="row"><span>Today, 10:30 AM</span><span>Seats: A5, A6</span></div>
+      <div class="row total"><span>Total Amount</span><span>₹440</span></div>
+    </div>
+
+    <p class="picker-label">Choose Payment Method</p>
+    <div class="pay-methods">
+      <div class="pay-method active">UPI</div>
+      <div class="pay-method">Credit / Debit Card</div>
+      <div class="pay-method">Net Banking</div>
+    </div>
+
+    <button class="continue-btn" onclick="showConfirmation()">Pay ₹440</button>
+  </div>
+
+  <div class="payment-page confirm-box" id="confirm-view" style="display:none;">
+    <div class="tick">✓</div>
+    <h2>Booking Confirmed!</h2>
+    <p style="color:var(--text-dim); margin-top:6px;">Kranti Ka Safar · Today, 10:30 AM · Seats A5, A6</p>
+    <div class="qr-box">QR CODE</div>
+    <button class="continue-btn" onclick="location.href='index.html'">Back to Home</button>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    function showConfirmation() {
+      document.getElementById('payment-view').style.display = 'none';
+      document.getElementById('confirm-view').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
