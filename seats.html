@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select Seats — ShowTime</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Show<span>Time</span></div>
+    <div class="nav-links">
+      <a href="index.html">Movies</a>
+      <a href="#">Cinemas</a>
+      <a href="#">Offers</a>
+    </div>
+    <div class="city-picker">Mathura, UP ▾</div>
+  </nav>
+
+  <div class="seat-page">
+    <p class="screen-label">ALL EYES THIS WAY</p>
+    <div class="screen-curve"></div>
+
+    <div class="seat-map" id="seat-map">
+      <!-- rows injected by js/script.js -->
+    </div>
+
+    <div class="legend">
+      <span><span class="box" style="background:var(--bg-raised); border:1px solid var(--border);"></span>Available</span>
+      <span><span class="box" style="background:var(--gold);"></span>Selected</span>
+      <span><span class="box" style="background:#3a3c4d;"></span>Taken</span>
+    </div>
+
+    <div class="booking-summary">
+      <div>
+        <div id="seat-summary" style="color:var(--text-dim); font-size:14px;">No seats selected</div>
+        <div id="price-summary" style="font-size:22px; font-weight:700; margin-top:4px;">₹0</div>
+      </div>
+      <button class="pay-btn">Proceed to Pay</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
