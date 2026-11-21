@@ -36,7 +36,7 @@ function uid(prefix) {
   return prefix + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 }
 
-// Booking ID such as CBK7M2QX9A
+// Booking ID such as CBK7M2QX9A (ambiguous characters 0/O/1/I are excluded)
 function makeBookingId() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let s = 'CB';
@@ -103,7 +103,7 @@ function isPastShow(show) {
   return showDateTime(show) < new Date();
 }
 
-// Seat type by row index
+// Seat type by row index: front rows are Normal, middle rows are Premium, last rows are Recliner
 function seatType(rowIdx, totalRows) {
   const normalRows = Math.floor(totalRows * 0.4);
   const premiumRows = Math.floor(totalRows * 0.8);
@@ -118,7 +118,7 @@ function rowLetter(i) {
   return String.fromCharCode(65 + i);
 }
 
-// Sorts seat IDs naturally (A1, A2, ... A10)
+// Sorts seat IDs naturally (A1, A2, ... A10) instead of alphabetically (A1, A10, A2)
 function sortSeats(list) {
   return list.slice().sort((a, b) =>
     a.charCodeAt(0) - b.charCodeAt(0) ||
@@ -174,11 +174,10 @@ function getBookedSeats(showId) {
 
 function seatPrice(seatId, screen) {
   const rowIdx = seatId.charCodeAt(0) - 65;
-
   return PRICES[seatType(rowIdx, screen.rows)];
 }
 
-// A gradient with the title is used in place of a poster image
+// A gradient with the title is used in place of a poster image (no image files required)
 function posterStyle(m) {
   return 'background: linear-gradient(160deg, ' + m.c1 + ', ' + m.c2 + ');';
 }
@@ -357,7 +356,7 @@ function seedScreens() {
   ];
 }
 
-// Generates shows for the next 5 days
+// Generates shows for the next 5 days. Each screen + date + time slot gets exactly one movie (no clashes)
 function seedShows(movies, screens) {
   const running = movies.filter(m => m.status === 'now');
   const shows = [];
