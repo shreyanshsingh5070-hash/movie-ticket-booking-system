@@ -24,7 +24,10 @@ const DB = {
 // ---------- ticket prices (by seat type) ----------
 const PRICES = { Normal: 150, Premium: 250, Recliner: 400 };
 const MAX_SEATS = 8;
+<<<<<<< HEAD
 const DATA_VERSION = 2;   // increase this whenever the sample data changes, so older saved data is refreshed
+=======
+>>>>>>> origin/somyani
 const SHOW_TIMES = ['10:00', '13:15', '16:30', '19:45'];
 
 // ---------- helper functions ----------
@@ -90,11 +93,14 @@ function seatType(rowIdx, totalRows) {
 
 function rowLetter(i) { return String.fromCharCode(65 + i); }
 
+<<<<<<< HEAD
 // Sorts seat IDs naturally (A1, A2, ... A10) instead of alphabetically (A1, A10, A2)
 function sortSeats(list) {
   return list.slice().sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0) || parseInt(a.slice(1), 10) - parseInt(b.slice(1), 10));
 }
 
+=======
+>>>>>>> origin/somyani
 // ---------- getters ----------
 function getMovies() { return DB.get('movies', []); }
 function getScreens() { return DB.get('screens', []); }
@@ -207,7 +213,10 @@ function initData() {
     DB.set('reviews', seedReviews());
     DB.set('bookings', []);
     DB.set('users', []);
+<<<<<<< HEAD
     DB.set('dataVersion', DATA_VERSION);
+=======
+>>>>>>> origin/somyani
   }
   // If all existing shows are in the past, generate new ones
   const today = dateStr(0);
@@ -217,6 +226,7 @@ function initData() {
   }
 }
 
+<<<<<<< HEAD
 // Refreshes sample content saved by an older version of the app (for example, outdated movie descriptions
 // and reviews). Bookings, users and any movies added by the admin are left untouched.
 function migrateData() {
@@ -243,3 +253,6 @@ function migrateData() {
 
 initData();
 migrateData();
+=======
+initData();
+>>>>>>> origin/somyani
