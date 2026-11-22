@@ -4,22 +4,34 @@ const movies = getMovies();
 const nowList = movies.filter(m => m.status === 'now');
 const soonList = movies.filter(m => m.status === 'soon');
 
-// ---- banner: top rated 3 movies ----
-const featured = nowList.slice().sort((a, b) => b.rating - a.rating).slice(0, 3);
+// ---- banner: four selected cinematic movies ----
+const bannerTitles = ['3 Idiots', 'Pushpa 2', 'Animal', 'Fighter'];
+const featured = bannerTitles
+  .map(title => movies.find(movie => movie.title.toLowerCase() === title.toLowerCase()))
+  .filter(Boolean);
+
 const slidesBox = document.getElementById('heroSlides');
-featured.forEach(function (m, i) {
-  const h = Math.floor(m.duration / 60) + 'h ' + (m.duration % 60) + 'm';
-  slidesBox.innerHTML +=
-    '<div class="carousel-item' + (i === 0 ? ' active' : '') + '">' +
-    '<div class="hero-slide" style="' + posterStyle(m) + '">' +
-    '<div class="hero-content">' +
-    '<span class="badge bg-danger mb-2">' + escapeHTML(m.language) + '</span>' +
-    '<h1>' + escapeHTML(m.title) + '</h1>' +
-    '<p class="text-light mb-1">' + escapeHTML(m.genre) + ' &middot; ' + h + ' &middot; <i class="bi bi-star-fill text-warning"></i> ' + m.rating.toFixed(1) + '</p>' +
-    '<p class="small text-light opacity-75 d-none d-md-block">' + escapeHTML(m.desc) + '</p>' +
-    '<a href="movie.html?id=' + m.id + '" class="btn btn-brand mt-2">Book Now</a>' +
-    '</div></div></div>';
-});
+
+if (slidesBox) {
+  slidesBox.innerHTML = featured.map(function (movie, index) {
+    const duration = Math.floor(movie.duration / 60) + 'h ' +
+      (movie.duration % 60) + 'm';
+
+    return (
+      '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
+        '<div class="hero-slide" style="' + heroBannerStyle(movie) + '">' +
+          '<div class="hero-content">' +
+            '<span class="badge bg-danger mb-2">' + escapeHTML(movie.language) + '</span>' +
+            '<h1>' + escapeHTML(movie.title) + '</h1>' +
+            '<p class="text-light mb-1">' + escapeHTML(movie.genre) + ' &middot; ' + duration + '</p>' +
+            '<p class="small text-light opacity-75 d-none d-md-block">' + escapeHTML(movie.desc) + '</p>' +
+            '<a href="movie.html?id=' + encodeURIComponent(movie.id) + '" class="btn btn-brand mt-2">Book Now</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }).join('');
+}
 
 // ---- grids ----
 document.getElementById('nowShowing').innerHTML = nowList.slice(0, 8).map(movieCardHTML).join('');

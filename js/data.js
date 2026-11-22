@@ -177,9 +177,49 @@ function seatPrice(seatId, screen) {
   return PRICES[seatType(rowIdx, screen.rows)];
 }
 
-// A gradient with the title is used in place of a poster image (no image files required)
+
 function posterStyle(m) {
-  return 'background: linear-gradient(160deg, ' + m.c1 + ', ' + m.c2 + ');';
+  const posterFiles = {
+    m1: 'm1.jpg', m2: 'm2.jpg', m3: 'm3.jpg',
+    m4: 'm4.jpg', m5: 'm5.jpg', m6: 'm6.jpg',
+    m7: 'm7.jpg', m8: 'm8.jpg', m9: 'm9.jpg',
+    m10: 'm10.jpg'
+  };
+
+  const file = posterFiles[m.id];
+
+  if (!file) {
+    return 'background: linear-gradient(160deg, ' + m.c1 + ', ' + m.c2 + ');';
+  }
+
+  const imagePath = './assets/posters/' + file;
+
+  return 'background-color: #111; ' +
+    'background-image: linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,.04) 72%), url(' + imagePath + '); ' +
+    'background-size: cover; ' +
+    'background-position: center 35%; ' +
+    'background-repeat: no-repeat;';
+}
+
+
+
+// Homepage cinematic banner images (local files, works offline).
+function heroBannerStyle(movie) {
+  const bannerFiles = {
+    m3: 'm3.jpg',   // 3 Idiots
+    m5: 'm5.jpg',   // Animal
+    m9: 'm9.jpg',   // Pushpa 2
+    m10: 'm10.jpg'  // Fighter
+  };
+
+  const file = bannerFiles[movie.id];
+  if (!file) return posterStyle(movie);
+
+  const imagePath = './assets/banners/' + file;
+  return 'background-color: #111; ' +
+    'background-image: linear-gradient(90deg, rgba(0,0,0,.86), rgba(0,0,0,.16)), ' +
+    'url(' + imagePath + '); ' +
+    'background-size: cover; background-position: center; background-repeat: no-repeat;';
 }
 
 function escapeHTML(s) {

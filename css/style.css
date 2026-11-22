@@ -300,3 +300,43 @@ a:hover { color: #ff9399; }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { color: #fff; }
 .progress { background-color: #2d2d3a; }
 
+
+
+/* ---------- Cinematic local banner image support ---------- */
+#heroCarousel,
+#heroCarousel .carousel-inner,
+#heroCarousel .carousel-item {
+  width: 100%;
+}
+
+#heroCarousel .carousel-item {
+  min-height: 340px;
+}
+
+#heroCarousel .hero-slide {
+  width: 100%;
+  height: 340px;
+  min-height: 340px;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  isolation: isolate;
+}
+
+#heroCarousel .hero-slide::after {
+  z-index: 0;
+  pointer-events: none;
+}
+
+#heroCarousel .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 576px) {
+  #heroCarousel .carousel-item,
+  #heroCarousel .hero-slide {
+    height: 260px;
+    min-height: 260px;
+  }
+}

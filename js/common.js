@@ -4,6 +4,20 @@
    ========================================================= */
 
 const ROOT = document.body.dataset.root || '';
+// Safe HTML escaping fallback. data.js also exposes this helper; keeping
+// it here prevents navbar rendering from failing if a page's script order changes.
+function escapeHTML(value) {
+  return String(value).replace(/[&<>\"']/g, function (character) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '\"': '&quot;',
+      "'": '&#39;'
+    }[character];
+  });
+}
+
 
 // ---------- session ----------
 function currentUser() {
